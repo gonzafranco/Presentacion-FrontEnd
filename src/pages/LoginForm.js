@@ -1,42 +1,15 @@
-import Axios from "axios";
 import React, { useState } from 'react';
-
-// function LoginForm() {
-//   const [usernameReg, setUsername] = useState('');
-//   const [passwordReg, setPassword] = useState('');
+import Axios from "axios";
 
 
-//     const login =  () => {
-//       Axios.post('http://localhost:3000/auth/login',
-//       {
-//           usuario: usernameReg,
-//           clave: passwordReg
-//       }).then((response ) =>{
-//           console.log(response);
-//       } );
-//   };
-
-  
-//     return (
-//       <div>
-//         <h2>Login</h2>
-//         <form>
-//           <label>
-//             Usuario:
-//             <input type="text" value={usernameReg} onChange={(e) => setUsername(e.target.value)} />
-//           </label>
-//           <br />
-//           <label>
-//             Contraseña:
-//             <input type="password" value={passwordReg} onChange={(e) => setPassword(e.target.value)} />
-//           </label>
-//           <br />
-//           <button type="submit" onClick={login()}>Login</button>
-//         </form>
-//       </div>
-//     );
-//   }
-
+import {
+  MDBContainer,
+  MDBCol,
+  MDBRow,
+  MDBBtn,
+  MDBInput,
+}
+from 'mdb-react-ui-kit';
 
 const LoginForm = () => {
   const [usuario, setUsuario] = useState("");
@@ -63,18 +36,27 @@ const LoginForm = () => {
   };
 
   return (
+
+    <MDBContainer fluid className="p-3 my-5">
+
+        <MDBRow>
+
+        <MDBCol col='5' md='3'>
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Log In" />
+        </MDBCol>
+
+        <MDBCol col='2' md='3'>
+
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>Usuario:</label>
-        <input type="text" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
-      </div>
-      <div>
-        <label>Clave:</label>
-        <input type="password" value={clave} onChange={(e) => setClave(e.target.value)} />
-      </div>
-      <button type="submit">Login</button>
+    <MDBInput wrapperClass='mb-4' label='Usuario' id='formControlLg' type='text' size="md" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
+    <MDBInput wrapperClass='mb-4' label='contraseña' id='formControlLg' type='password' size="md" value={clave} onChange={(e) => setClave(e.target.value)} />
+
+    <MDBBtn className="mb-4 w-100" size="md" type="submit" >Log In</MDBBtn>
       {error && <div style={{ color: "red" }}>{error}</div>}
     </form>
+    </MDBCol>
+    </MDBRow>
+    </MDBContainer> 
   );
 };
 

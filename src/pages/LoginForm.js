@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 
 import {
@@ -15,6 +16,10 @@ const LoginForm = () => {
   const [usuario, setUsuario] = useState("");
   const [clave, setClave] = useState("");
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
+
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,8 +32,11 @@ const LoginForm = () => {
         usuario,
         clave
       });
-      console.log(response.data);
+      console.log(response.data);   
+      setSuccessMessage("Inicio de sesión exitoso!");
+      localStorage.setItem('authToken', response.data.data.token);
       setError("");
+      navigate('/dashboard');
     } catch (error) {
       console.log(error.response.data);
       setError(error.response.data.message || error.response.data.error);
@@ -53,6 +61,7 @@ const LoginForm = () => {
 
     <MDBBtn className="mb-4 w-100" size="md" type="submit" >Log In</MDBBtn>
       {error && <div style={{ color: "red" }}>{error}</div>}
+      {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
     </form>
     </MDBCol>
     </MDBRow>
@@ -61,4 +70,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-  

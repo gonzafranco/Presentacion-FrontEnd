@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import TareaDashboard from "./TareaDashboard";
+
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -22,18 +24,14 @@ const Dashboard = () => {
     }
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    navigate("/login");
-  };
+  
 
   return (
     <div>
-      <h1>Q onda {userData.usuario} ?</h1>
-      <h2>Linda ID :  {userData.id} </h2>
-      <button onClick={handleLogout}>Logout</button>
+      <h1>Bienvenido {userData.usuario}</h1>
+      <TareaDashboard/>
     </div>
   );
-};
+}
 
 export default Dashboard;

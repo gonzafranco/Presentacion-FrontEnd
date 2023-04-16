@@ -37,6 +37,7 @@ const LoginForm = () => {
       localStorage.setItem('authToken', response.data.data.token);
       setError("");
       navigate('/dashboard');
+      window.location.reload();
     } catch (error) {
       console.log(error.response.data);
       setError(error.response.data.message || error.response.data.error);

@@ -18,6 +18,7 @@ const Dashboard = () => {
     try {
       const decodedToken = jwt_decode(token);
       setUserData(decodedToken);
+      console.log(userData);
     } catch (error) {
       console.log(error);
       navigate("/login");

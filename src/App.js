@@ -6,7 +6,6 @@ import LoginForm from './components/LoginForm';
 import Home from './components/HomePage';
 import Foot from './components/Footer';
 import Dashboard from './components/DashBoard';
-import TareaForm from './components/TareaForm';
 import Logout from './components/Logout';
 
 
@@ -26,7 +25,6 @@ function App() {
             {!token && <Nav.Link as={Link} to="/register">Register</Nav.Link>}
             {!token && <Nav.Link as={Link} to="/login">Log in</Nav.Link>}
             {token && <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>}
-            {token && <Nav.Link as={Link} to="/tarea">Crear tarea</Nav.Link>}
             {token && <Nav.Link as={Link} to="/logout">Log out</Nav.Link>}
             </Nav>
           </Navbar.Collapse>
@@ -37,7 +35,6 @@ function App() {
         <Route path='/register' element={<RegisterForm/>} />
         <Route path='/login' element={<LoginForm/>} /> 
         <Route path='/dashboard' element={<Dashboard/>} /> 
-        <Route path='/tarea' element={<TareaForm/>} /> 
         <Route path='/logout' element={<Logout/>} /> 
 
       </Routes> 

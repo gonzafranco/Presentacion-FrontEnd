@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
-import Axios from "axios";
+import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-
-
-import {
-  MDBContainer,
-  MDBCol,
-  MDBRow,
-  MDBBtn,
-  MDBInput,
-}
-from 'mdb-react-ui-kit';
+import { Container, Col, Row, Button, Form, Alert } from 'react-bootstrap';
 
 const LoginForm = () => {
   const [usuario, setUsuario] = useState("");
@@ -19,20 +10,18 @@ const LoginForm = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
-
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (usuario === "" ||  clave === "") {
+    if (usuario === "" || clave === "") {
       setError("Por favor rellenar todos los campos");
       return;
     }
     try {
-      const response = await Axios.post("http://localhost:3000/auth/login", {
+      const response = await axios.post("http://localhost:3000/auth/login", {
         usuario,
         clave
       });
-      console.log(response.data);   
+      console.log(response.data);
       setSuccessMessage("Inicio de sesión exitoso!");
       localStorage.setItem('authToken', response.data.data.token);
       setError("");
@@ -45,28 +34,45 @@ const LoginForm = () => {
   };
 
   return (
+    <Container fluid className="p-3 my-5">
+      <Row>
+        <Col md="5" lg="3">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+            className="img-fluid"
+            alt="Log In"
+          />
+        </Col>
+        <Col md="7" lg="9">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="usuario">
+              <Form.Label>Usuario</Form.Label>
+              <Form.Control
+                type="text"
+                value={usuario}
+                onChange={(e) => setUsuario(e.target.value)}
+              />
+            </Form.Group>
 
-    <MDBContainer fluid className="p-3 my-5">
+            <Form.Group controlId="clave">
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                value={clave}
+                onChange={(e) => setClave(e.target.value)}
+              />
+            </Form.Group>
 
-        <MDBRow>
+            <Button variant="primary" type="submit" className="mb-4 w-100">
+              Log In
+            </Button>
 
-        <MDBCol col='5' md='3'>
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Log In" />
-        </MDBCol>
-
-        <MDBCol col='2' md='3'>
-
-    <form onSubmit={handleSubmit}>
-    <MDBInput wrapperClass='mb-4' label='Usuario' id='formControlLg' type='text' size="md" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
-    <MDBInput wrapperClass='mb-4' label='contraseña' id='formControlLg' type='password' size="md" value={clave} onChange={(e) => setClave(e.target.value)} />
-
-    <MDBBtn className="mb-4 w-100" size="md" type="submit" >Log In</MDBBtn>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-      {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
-    </form>
-    </MDBCol>
-    </MDBRow>
-    </MDBContainer> 
+            {error && <Alert variant="danger">{error}</Alert>}
+            {successMessage && <Alert variant="success">{successMessage}</Alert>}
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

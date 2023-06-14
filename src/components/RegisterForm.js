@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
-import { 
-        MDBContainer,
-        MDBCol, 
-        MDBRow,
-        MDBBtn, 
-        MDBInput,
-}from 'mdb-react-ui-kit';
+import { Container, Col, Row, Button, Form, Alert } from 'react-bootstrap';
 
 const RegisterForm = () => {
   const [usuario, setUsuario] = useState("");
@@ -37,24 +30,55 @@ const RegisterForm = () => {
     }
   };
 
-  return (  
-    <MDBContainer fluid className="p-3 my-5">
-      <MDBRow>
-        <MDBCol col='5' md='3'>
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="img-fluid" alt="Registro" />
-        </MDBCol>
-        <MDBCol col='2' md='3'>
-          <form onSubmit={handleSubmit}>
-            <MDBInput wrapperClass='mb-4' label='Usuario' id='formControlLg' type='text' size="md" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
-            <MDBInput wrapperClass='mb-4' label='Email' id='formControlLg' type='email' size="md" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <MDBInput wrapperClass='mb-4' label='contraseña' id='formControlLg' type='password' size="md" value={clave} onChange={(e) => setClave(e.target.value)} />
-            <MDBBtn className="mb-4 w-100" size="md" type="submit" >Registrarse</MDBBtn>
-            {error && <div style={{ color: "red" }}>{error}</div>}
-            {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
-          </form>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
+  return (
+    <Container fluid className="p-3 my-5">
+      <Row>
+        <Col md="5" lg="3">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+            className="img-fluid"
+            alt="Registro"
+          />
+        </Col>
+        <Col md="7" lg="9">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="usuario">
+              <Form.Label>Usuario</Form.Label>
+              <Form.Control
+                type="text"
+                value={usuario}
+                onChange={(e) => setUsuario(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="clave">
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                value={clave}
+                onChange={(e) => setClave(e.target.value)}
+              />
+            </Form.Group>
+
+            <Button variant="primary" type="submit" className="mb-4 w-100">
+              Registrarse
+            </Button>
+
+            {error && <Alert variant="danger">{error}</Alert>}
+            {successMessage && <Alert variant="success">{successMessage}</Alert>}
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

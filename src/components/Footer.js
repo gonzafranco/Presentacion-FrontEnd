@@ -1,14 +1,17 @@
 import React from 'react';
-import { MDBFooter } from 'mdb-react-ui-kit';
+import { Container, Row, Col } from 'react-bootstrap';
 
-  const Footer = () => {
+const Footer = () => {
   return (
-    <MDBFooter bgColor='light' className='text-center text-lg-left fixed-bottom'>
-      <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        &copy; {new Date().getFullYear()} Copyright: Nahuel Arias && Franco Gonzalez
- 
-      </div>
-    </MDBFooter>
+    <footer className='bg-light text-center text-lg-left fixed-bottom'>
+      <Container fluid>
+        <Row>
+          <Col className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+            &copy; {new Date().getFullYear()} Nahuel Arias && Franco Gonzalez
+          </Col>
+        </Row>
+      </Container>
+    </footer>
   );
 }
 

@@ -24,7 +24,7 @@ const HomePage = () => {
           {' '}
           y
           {' '}
-          <a href="https://github.com/gonzafranco/Presentacion-BackEnd">Presentacion BackEnd</a>
+          <a href="https://github.com/gonzafranco/Backend-Presentacion">Presentacion BackEnd</a>
       </p>
       </Container>
     </div>
